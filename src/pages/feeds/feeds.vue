@@ -11,7 +11,7 @@
         <ul class="stories">
           <li
             class="stories-item"
-            v-for="story in stories"
+            v-for="story in data.stories"
             :key="story.id"
           >
             <storyUserItem
@@ -24,24 +24,39 @@
       </template>
     </topline>
   </div>
+  <ul class="feeds">
+    <li
+      class="feed-item"
+      v-for="feed in data.feeds"
+      :key="feed.id"
+    >
+      <feed
+        :avatar="feed.avatar"
+        :username="feed.username"
+        :comments="feed.comments"
+      />
+    </li>
+  </ul>
 </template>
 
 <script>
 import { topline } from '@/components/topline'
 import { icon } from '@/icons'
 import { storyUserItem } from '@/components/storyUserItem'
-import stories from './data.json'
+import { feed } from '@/components/feed'
+import data from './data.json'
 
 export default {
   name: 'feeds',
   components: {
     topline,
     icon,
-    storyUserItem
+    storyUserItem,
+    feed
   },
   data() {
     return {
-      stories
+      data
     }
   },
   methods: {
