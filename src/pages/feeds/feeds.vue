@@ -8,7 +8,19 @@
         </div>
       </template>
       <template #content>
-        <h2>Stories</h2>
+        <ul class="stories">
+          <li
+            class="stories-item"
+            v-for="story in stories"
+            :key="story.id"
+          >
+            <storyUserItem
+              :avatar="story.avatar"
+              :username="story.username"
+              @onPress="handlePress(story.id)"
+            />
+          </li>
+        </ul>
       </template>
     </topline>
   </div>
@@ -17,19 +29,27 @@
 <script>
 import { topline } from '@/components/topline'
 import { icon } from '@/icons'
+import { storyUserItem } from '@/components/storyUserItem'
+import stories from './data.json'
 
 export default {
   name: 'feeds',
   components: {
     topline,
-    icon
+    icon,
+    storyUserItem
+  },
+  data() {
+    return {
+      stories
+    }
+  },
+  methods: {
+    handlePress(id) {
+      console.log(id)
+    }
   }
 }
 </script>
 
-<style lang="scss">
-.icon {
-  color: red;
-  width: 50px;
-}
-</style>
+<style src="./feeds.scss" lang="scss" scoped></style>
