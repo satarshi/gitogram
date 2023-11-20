@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="['buton', { 'active': isActive }]"
+    :class="['button', { 'active': isActive }]"
     @click="toggle"
   >
     <span class="text">{{ isActive ? 'Hide' : 'Show' }} issues</span>
@@ -31,3 +31,5 @@ export default {
   }
 }
 </script>
+
+<styles src="./toggler.scss" lang="scss" scoped></styles>

@@ -1,5 +1,10 @@
 <template>
   <div class="c-feed">
+    <feedUser
+      :avatar="avatar"
+      :username="username"
+    />
+    <slot></slot>
     <toggler @onToggle="toggle" />
     <div class="comments" v-if="shown">
       <ul class="comments-list">
@@ -8,18 +13,26 @@
         </li>
       </ul>
     </div>
+    <div
+      v-if="date"
+      class="date"
+    >
+      {{ date }}
+    </div>
   </div>
 </template>
 
 <script>
 import { comment } from '../comment'
 import { toggler } from '../toggler'
+import { feedUser } from '../feedUser'
 
 export default {
   name: 'feed-item',
   components: {
     comment,
-    toggler
+    toggler,
+    feedUser
   },
   props: {
     avatar: {
@@ -35,6 +48,9 @@ export default {
       default() {
         return []
       }
+    },
+    date: {
+      type: String
     }
   },
   data() {
@@ -48,7 +64,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style src="./feed.scss" lang="scss" scoped></style>

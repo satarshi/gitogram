@@ -7,3 +7,42 @@
   display: flex;
   justify-content: space-between;
 }
+
+.feeds {
+  margin: 32px 110px;
+}
+
+.feed-item {
+  + .feed-item {
+    margin-top: 24px;
+  }
+}
+
+.container {
+  width: 100%;
+  padding: 24px 20px;
+  border-radius: 10px;
+  border: 1px solid #f1f1f1;
+  gap: 10px;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: inline-flex;
+  margin-top: 16px;
+  margin-bottom: 18px;
+
+  .title {
+    color: #292929;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  .text {
+    color: #404040;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.40px;
+  }
+}

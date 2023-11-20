@@ -1,0 +1,21 @@
+.c-feed-user{
+  display: flex;
+  align-items: center;
+
+  .avatar {
+    .img {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  .username {
+    color: #262626;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    margin-left: 14px;
+    letter-spacing: -0.1px;
+  }
+}
+  

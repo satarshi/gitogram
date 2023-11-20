@@ -24,19 +24,27 @@
       </template>
     </topline>
   </div>
-  <ul class="feeds">
-    <li
-      class="feed-item"
-      v-for="feed in data.feeds"
-      :key="feed.id"
-    >
-      <feed
-        :avatar="feed.avatar"
-        :username="feed.username"
-        :comments="feed.comments"
-      />
-    </li>
-  </ul>
+  <div class="x-container">
+    <ul class="feeds">
+      <li
+        class="feed-item"
+        v-for="feed in data.feeds"
+        :key="feed.id"
+      >
+        <feed
+          :avatar="feed.avatar"
+          :username="feed.username"
+          :comments="feed.comments"
+          :date="feed.feed.date"
+        >
+          <div class="container">
+            <div class="title">{{ feed.feed.title }}</div>
+            <div class="text" v-html="feed.feed.text"></div>
+          </div>
+        </feed>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

@@ -1,0 +1,19 @@
+.comments-list {
+  margin-top: 10px;
+  
+  .comments-item {
+    + .comments-item {
+      margin-top: 6px;
+    }
+  }
+}
+
+.date {
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.40);
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 14px; 
+  letter-spacing: 1.20px;
+}
