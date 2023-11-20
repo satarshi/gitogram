@@ -51,6 +51,12 @@
           <div class="container">
             <div class="title">{{ feed.feed.title }}</div>
             <div class="text" v-html="feed.feed.text"></div>
+            <social
+              :star="feed.feed.counts.star"
+              :fork="feed.feed.counts.fork"
+              @onStarClick="socialClicked"
+              @onForkClick="socialClicked"
+            />
           </div>
         </feed>
       </li>
@@ -63,6 +69,7 @@ import { topline } from '@/components/topline'
 import { icon } from '@/icons'
 import { storyUserItem } from '@/components/storyUserItem'
 import { feed } from '@/components/feed'
+import { social } from '@/components/social'
 import photo from '@/assets/photo.png'
 import data from './data.json'
 
@@ -72,7 +79,8 @@ export default {
     topline,
     icon,
     storyUserItem,
-    feed
+    feed,
+    social
   },
   data() {
     return {
@@ -83,6 +91,9 @@ export default {
   methods: {
     handlePress(id) {
       console.log(id)
+    },
+    socialClicked() {
+      console.log('SocialClicked')
     }
   }
 }
