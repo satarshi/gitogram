@@ -52,6 +52,7 @@
             <div class="title">{{ feed.feed.title }}</div>
             <div class="text" v-html="feed.feed.text"></div>
             <social
+              class="social"
               :star="feed.feed.counts.star"
               :fork="feed.feed.counts.fork"
               @onStarClick="socialClicked"
