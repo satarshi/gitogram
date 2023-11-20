@@ -3,8 +3,19 @@
   <div class="topline">
     <topline>
       <template #headline>
-        <div class="icon">
-          <icon name="home" />
+        <div class="gitogram">
+          <icon name="gitogram" />
+        </div>
+        <div class="icons">
+          <div class="icon">
+            <icon name="home" />
+          </div>
+          <div class="photo">
+            <img :src="photo" alt="user photo" />
+          </div>
+          <div class="icon">
+            <icon name="signOut" />
+          </div>
         </div>
       </template>
       <template #content>
@@ -52,6 +63,7 @@ import { topline } from '@/components/topline'
 import { icon } from '@/icons'
 import { storyUserItem } from '@/components/storyUserItem'
 import { feed } from '@/components/feed'
+import photo from '@/assets/photo.png'
 import data from './data.json'
 
 export default {
@@ -64,7 +76,8 @@ export default {
   },
   data() {
     return {
-      data
+      data,
+      photo
     }
   },
   methods: {

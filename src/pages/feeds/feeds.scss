@@ -1,6 +1,29 @@
+.icons {
+  display: flex;
+  align-items: center;
+}
+
 .icon {
   color: #262626;
   width: 32px;
+
+  + .photo {
+    margin-left: 24px;
+  }
+}
+
+.photo {
+  width: 37px;
+  height: 37px;
+
+  + .icon {
+    margin-left: 20px;
+  }
+}
+
+.gitogram {
+  color: #262626;
+  width: 174px;
 }
 
 .stories {
