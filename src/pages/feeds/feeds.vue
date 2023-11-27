@@ -22,7 +22,7 @@
         <ul class="stories">
           <li
             class="stories-item"
-            v-for="story in data.stories"
+            v-for="story in mock.stories"
             :key="story.id"
           >
             <storyUserItem
@@ -39,22 +39,22 @@
     <ul class="feeds">
       <li
         class="feed-item"
-        v-for="feed in data.feeds"
+        v-for="feed in items"
         :key="feed.id"
       >
         <feed
-          :avatar="feed.avatar"
-          :username="feed.username"
-          :comments="feed.comments"
-          :date="feed.feed.date"
+          :avatar="feed.owner?.avatar_url"
+          :username="feed.owner?.login"
+          :comments="mock.feeds[0]?.comments"
+          :date="feed.created_at"
         >
           <div class="container">
-            <div class="title">{{ feed.feed.title }}</div>
-            <div class="text" v-html="feed.feed.text"></div>
+            <div class="title">{{ feed.name }}</div>
+            <div class="text" v-html="feed.description"></div>
             <social
               class="social"
-              :star="feed.feed.counts.star"
-              :fork="feed.feed.counts.fork"
+              :star="feed.stargazers_count"
+              :fork="feed.forks_count"
               @onStarClick="socialClicked"
               @onForkClick="socialClicked"
             />
@@ -72,7 +72,9 @@ import { storyUserItem } from '@/components/storyUserItem'
 import { feed } from '@/components/feed'
 import { social } from '@/components/social'
 import photo from '@/assets/photo.png'
-import data from './data.json'
+import mock from './mock.json'
+
+import { getPopular } from '@/api/rest/popular'
 
 export default {
   name: 'feeds',
@@ -85,8 +87,9 @@ export default {
   },
   data() {
     return {
-      data,
-      photo
+      mock,
+      photo,
+      items: []
     }
   },
   methods: {
@@ -95,6 +98,15 @@ export default {
     },
     socialClicked() {
       console.log('SocialClicked')
+    }
+  },
+  async created() {
+    // this.mock = mock
+    try {
+      const { data } = await getPopular()
+      this.items = data.items
+    } catch (error) {
+      console.log(error)
     }
   }
 }
