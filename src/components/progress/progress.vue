@@ -1,6 +1,6 @@
 <template>
   <div class="c-progress" :class="{ 'active': active }">
-    <div class="indicator"></div>
+    <div ref="indicator" class="indicator"></div>
   </div>
 </template>
 
@@ -12,11 +12,22 @@ export default {
       active: false
     }
   },
+  emits: ['onFinish'],
+  methods: {
+    emitOnFinish() {
+      this.$emit('onFinish')
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       // без таймаута css transition не работает
       setTimeout(() => { this.active = true }, 0)
     })
+
+    this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
+  },
+  beforeUnmount() {
+    this.$refs.indicator.removeEventListener('transitionend', this.emitOnFinish)
   }
 }
 </script>

@@ -4,12 +4,21 @@ export default {
   title: 'Progress',
   tags: ['autodocs'],
   component: { Progress },
+  argTypes: {
+    onFinish: {
+      action: "onFinish",
+      description: "fires when progress reaches the end"
+    }
+  }
 }
 
 export const Default = {
   name: 'Стандартный вид',
   render: (args) => ({
     components: { Progress },
-    template: `<Progress />`
+    setup() {
+      return { args };
+    },
+    template: `<Progress @onFinish="args.onFinish" />`
   })
 }
