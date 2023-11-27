@@ -5,7 +5,7 @@ export default {
   tags: ['autodocs'],
   component: { Button },
   args: {
-    title: 'Follow me'
+    title: 'Follow'
   }
 }
 

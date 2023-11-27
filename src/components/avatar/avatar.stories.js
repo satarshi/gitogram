@@ -1,6 +1,7 @@
 import Avatar from './avatar.vue'
 
 export default {
+  title: 'Avatar',
   tags: ['autodocs'],
   component: Avatar,
   args: {
