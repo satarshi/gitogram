@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { icon } from '@/icons'
+import { icon } from '../../icons'
 
 export default {
   name: 'social',
