@@ -17,6 +17,7 @@
     "luxon": "^3.4.4",
     "node-fetch": "^2.6.1",
     "vue": "^3.2.13",
+    "vue-content-loader": "^2.0.1",
     "vue-router": "4"
   },
   "devDependencies": {

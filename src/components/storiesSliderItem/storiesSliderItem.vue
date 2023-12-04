@@ -1,14 +1,20 @@
 <template>
   <div class="wrapper">
-    <Progress />
+    <Progress active />
     <div class="avatar-container">
       <Avatar
-        avatar="https://cdn-icons-png.flaticon.com/512/146/146013.png"
-        username="Peter"
+        :avatar="data.userAvatar"
+        :username="data.username"
       />
     </div>
     <div class="content-wrapper">
-      <slot />
+      <div v-if="loading" class="loader">
+        <spinner />
+      </div>
+      <div class="info">
+        <div v-if="data.content?.length" class="contentx-text" v-html="data.content"></div>
+        <placeholder :paragraphs="2" />
+      </div>
     </div>
     <div class="button-wrapper">
       <Button title="Follow" />
@@ -20,6 +26,7 @@
 import { progress } from '../progress'
 import { avatar } from '../avatar'
 import { button } from '../button'
+import { placeholder } from '../placeholder'
 
 export default {
   name: 'storiesSliderItem',
@@ -27,6 +34,15 @@ export default {
     Progress: progress,
     Avatar: avatar,
     Button: button
+  },
+  props: {
+    active: Boolean,
+    loading: Boolean,
+    data: {
+      type: Object,
+      required: true,
+      default: () => ({})
+    }
   }
 }
 </script>

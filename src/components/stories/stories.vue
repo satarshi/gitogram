@@ -2,10 +2,10 @@
   <div class="wrapper">
     <div class="header">
       <div class="x-container">
-        <button class="logo">
+        <button class="logo" @click="$router.push({name: 'feeds'})">
           <icon name="gitogram" />
         </button>
-        <button class="close-btn">
+        <button class="close-btn" @click="$router.push({name: 'feeds'})">
           <icon name="close" />
         </button>
       </div>

@@ -7,10 +7,8 @@
 <script>
 export default {
   name: 'progress',
-  data() {
-    return {
-      active: false
-    }
+  props: {
+    active: Boolean
   },
   emits: ['onFinish'],
   methods: {
@@ -19,11 +17,6 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      // без таймаута css transition не работает
-      setTimeout(() => { this.active = true }, 0)
-    })
-
     this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
   },
   beforeUnmount() {
