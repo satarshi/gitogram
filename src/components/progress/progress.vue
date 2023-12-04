@@ -21,11 +21,20 @@ export default {
       this.$emit('onFinish')
     }
   },
+  watch: {
+    // whenever question changes, this function will run
+    active(val) {
+      this.$nextTick(() => {
+        // без таймаута css transition не работает
+        setTimeout(() => { this.activeData = val }, 0)
+      })
+    }
+  },
   mounted() {
     this.$nextTick(() => {
-      // без таймаута css transition не работает
       setTimeout(() => { this.activeData = this.active }, 0)
     })
+
     this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
   },
   beforeUnmount() {
