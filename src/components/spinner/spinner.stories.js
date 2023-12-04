@@ -10,6 +10,6 @@ export const Default = {
   name: 'Стандартный вид',
   render: () => ({
     components: { Spinner },
-    template: `<Spinner/>`
+    template: `<Spinner />`
   })
 }
