@@ -22,13 +22,13 @@
         <ul class="stories">
           <li
             class="stories-item"
-            v-for="story in mock.stories"
-            :key="story.id"
+            v-for="item in items"
+            :key="item.id"
           >
             <storyUserItem
-              :avatar="story.avatar"
-              :username="story.username"
-              @onPress="handlePress(story.id)"
+              :avatar="item.owner?.avatar_url"
+              :username="item.owner?.login"
+              @onPress="$router.push({ name: 'stories', params: { initialSlide: item.id }})"
             />
           </li>
         </ul>

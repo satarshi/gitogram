@@ -1,5 +1,5 @@
 <template>
-  <div class="stories">
+  <div class="stories-wrapper">
     <div class="header">
       <div class="x-container">
         <button class="logo" @click="$router.push({name: 'feeds'})">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="content">
-      <storiesSlider />
+      <storiesSlider :initialSlide="Number($route.params.initialSlide)" />
     </div>
   </div>
 </template>
@@ -34,9 +34,27 @@ export default {
 </script>
 
 <styles lang="scss" scoped>
-.stories {
+.stories-wrapper {
   height: 100vh;
   background-color: #404040;
-}
 
+  .logo {
+    width: 174px;
+    height: 40px;
+    color: white;
+  }
+
+  .close-btn {
+    width: 23px;
+    height: 23px;
+    color: white;
+  }
+
+  .x-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 44px 0px;
+  }
+}
 </styles>

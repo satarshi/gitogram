@@ -9,12 +9,12 @@
     </div>
     <div class="content-wrapper">
       <div v-if="loading" class="loader">
-        <Spinner />
+        <spinner />
       </div>
       <div v-else class="info">
         <div
           v-if="data.content?.length"
-          class="contentx-text"
+          class="content-text"
           v-html="data.content"
         ></div>
         <placeholder v-else :paragraphs="2" />
@@ -24,15 +24,19 @@
       <Button title="Follow" />
     </div>
     <template v-if="active">
-      <button class="btn btn-next">
-        <span class="icon">
-          <icon name="arrow" />
-        </span>
+      <button
+        v-if="btnsShown.includes('next')"
+        class="btn btn-next"
+        @click="$emit('onNextSlide')"
+      >
+        <icon name="arrow" />
       </button>
-      <button class="btn btn-prev">
-        <span class="icon">
-          <icon name="arrow" />
-        </span>
+      <button
+        v-if="btnsShown.includes('prev')"
+        class="btn btn-prev"
+        @click="$emit('onPrevSlide')"
+      >
+        <icon name="arrow" />
       </button>
     </template>
   </div>
@@ -44,6 +48,7 @@ import { avatar } from '../avatar'
 import { button } from '../button'
 import { spinner } from '../spinner'
 import { placeholder } from '../placeholder'
+import { icon } from '../../icons'
 
 export default {
   name: 'storiesSliderItem',
@@ -52,12 +57,17 @@ export default {
     Avatar: avatar,
     Button: button,
     spinner,
-    placeholder
+    placeholder,
+    icon
 
   },
   props: {
     active: Boolean,
     loading: Boolean,
+    btnsShown: {
+      type: Array,
+      default: () => ['next', 'prev']
+    },
     data: {
       type: Object,
       required: true,
@@ -73,6 +83,7 @@ export default {
   width: 375px;
   border-radius: 8px;
   background: #FFFFFF;
+  position: relative;
 }
 
 .avatar-container {
@@ -94,6 +105,7 @@ export default {
     background-color: #CACACA;
     height: 1px;
     margin: 0px -8px;
+    margin-bottom: 10px;
   }
 
   &:after {
@@ -102,6 +114,7 @@ export default {
     background-color: #CACACA;
     height: 1px;
     margin: 0px -8px;
+    margin-top: 10px;
   }
 }
 
@@ -109,5 +122,27 @@ export default {
   padding: 24px 0px;
   display: flex;
   justify-content: center;
+}
+
+.btn {
+  width: 44px;
+  height: 44px;
+  color: black;
+  position: absolute;
+  z-index: 10;
+  top: calc(50% - 22px);
+
+  &:hover {
+    color: #31AE54;
+  }
+
+  &.btn-prev {
+    transform: rotate(180deg);
+    left: -60px;
+  }
+
+  &.btn-next{
+    right: -60px;
+  }
 }
 </styles>

@@ -23,4 +23,37 @@ export default {
 }
 </script>
 
-<style src="./storyUserItem.scss" lang="scss" scoped></style>
+<style lang="scss" scoped>
+.c-story-user-item {
+  &:hover {
+    .avatar {
+      border-color: transparent;
+    }
+  }
+
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 92px;
+    height: 92px;
+    border: 2px solid #A6328D;
+    border-radius: 100%;
+
+    .img {
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+      border-radius: 100%;
+    }
+  }
+
+  .username {
+    color: #000000;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 10px;
+  }
+}
+</style>
