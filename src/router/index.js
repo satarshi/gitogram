@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 import { feeds } from '../pages/feeds'
-import { stories } from '../components/stories'
+import { stories } from '../pages/stories'
 
 const routes = [
   {
@@ -14,11 +14,6 @@ const routes = [
     component: stories,
     name: 'stories'
   }
-  // {
-  //   path: '/:pathMath(.*)',
-  //   component: NotFound,
-  //   name: 'notFound'
-  // }
 ]
 
 export const router = createRouter({

@@ -22,11 +22,11 @@ export default {
     color: #31AE54;
     animation: spin 2s linear infinite;
   }
-  
-  @keyframes spin { 
-    100% { 
-      -webkit-transform: rotate(360deg); 
-      transform:rotate(360deg); 
-    } 
+
+  @keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform:rotate(360deg);
+    }
   }
 </styles>
