@@ -17,8 +17,10 @@ export default {
 
 <styles lang="scss" scoped>
   .spinner {
+    width: 62px;
+    height: 62px;
     color: #31AE54;
-    animation: spin 4s linear infinite;
+    animation: spin 2s linear infinite;
   }
   
   @keyframes spin { 
