@@ -101,7 +101,6 @@ export default {
     }
   },
   async created() {
-    // this.mock = mock
     try {
       const { data } = await getPopular()
       this.items = data.items

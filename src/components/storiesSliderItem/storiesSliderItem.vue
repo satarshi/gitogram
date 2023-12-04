@@ -22,7 +22,7 @@ import { avatar } from '../avatar'
 import { button } from '../button'
 
 export default {
-  name: 'sliderItem',
+  name: 'storiesSliderItem',
   components: {
     Progress: progress,
     Avatar: avatar,
