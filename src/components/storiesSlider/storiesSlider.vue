@@ -66,13 +66,13 @@ export default {
   },
   async mounted() {
     console.log(this.$route.params.initialSlide)
+    await this.fetchTrendings()
     if (this.initialSlide) {
       const ndx = this.trendings.findIndex(
         (item) => item.id === this.initialSlide
       )
       await this.handleSlide(ndx)
     }
-    await this.fetchTrendings()
   }
 }
 </script>
