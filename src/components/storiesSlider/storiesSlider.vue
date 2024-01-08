@@ -9,6 +9,7 @@
             :loading="slideNdx === ndx && loading"
             @onNextSlide="handleSlide(ndx + 1)"
             @onPrevSlide="handleSlide(ndx - 1)"
+            @onProgressFinish="handleSlide(ndx + 1)"
             :btnsShown="activeBtns"
           />
         </li>
@@ -82,6 +83,7 @@ export default {
       }
     },
     async handleSlide(ndx) {
+      if (ndx > this.trendings.length - 1) return
       this.slideNdx = ndx
       await this.loadReadme()
     }

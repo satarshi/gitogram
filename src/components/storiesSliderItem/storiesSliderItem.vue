@@ -1,6 +1,6 @@
 <template>
   <div class="slider-item" :class="{ active }">
-    <Progress :active="active" />
+    <Progress :active="active" @onFinish="$emit('onProgressFinish')" />
     <div class="avatar-container">
       <Avatar
         :avatar="data.userAvatar"
@@ -61,6 +61,7 @@ export default {
     icon
 
   },
+  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish'],
   props: {
     active: Boolean,
     loading: Boolean,
