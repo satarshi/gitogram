@@ -13,7 +13,7 @@
           <div class="photo">
             <img :src="photo" alt="user photo" />
           </div>
-          <div class="icon">
+          <div class="icon" @click="logout">
             <icon name="signOut" />
           </div>
         </div>
@@ -22,7 +22,7 @@
         <ul class="stories">
           <li
             class="stories-item"
-            v-for="item in trendings"
+            v-for="item in getUnstarredOnly"
             :key="item.id"
           >
             <storyUserItem
@@ -39,13 +39,13 @@
     <ul class="feeds">
       <li
         class="feed-item"
-        v-for="feed in trendings"
+        v-for="(feed, ndx) in starred"
         :key="feed.id"
       >
         <feed
           :avatar="feed.owner?.avatar_url"
           :username="feed.owner?.login"
-          :comments="mock.feeds[0]?.comments"
+          :feed="ndx"
           :date="feed.created_at"
         >
           <div class="container">
@@ -73,7 +73,7 @@ import { feed } from '@/components/feed'
 import { social } from '@/components/social'
 import photo from '@/assets/photo.png'
 import mock from './mock.json'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'feeds',
@@ -92,22 +92,30 @@ export default {
   },
   computed: {
     ...mapState({
-      trendings: state => state.trendings.data
-    })
+      trendings: state => state.trendings.data,
+      starred: state => state.starred.data
+    }),
+    ...mapGetters(['getUnstarredOnly'])
   },
   methods: {
     ...mapActions({
-      fetchTrendings: 'trendings/fetchTrendings'
+      fetchTrendings: 'trendings/fetchTrendings',
+      fetchStarred: 'starred/fetchStarred'
     }),
     handlePress(id) {
       console.log(id)
     },
     socialClicked() {
       console.log('SocialClicked')
+    },
+    logout() {
+      localStorage.removeItem('token')
+      window.location.reload()
     }
   },
   async created() {
     await this.fetchTrendings()
+    await this.fetchStarred()
   }
 }
 </script>

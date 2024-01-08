@@ -8,8 +8,8 @@
     <toggler @onToggle="toggle" />
     <div class="comments" v-if="shown">
       <ul class="comments-list">
-        <li class="comments-item" v-for="comment in comments" :key="comment.id">
-          <comment :text="comment.text" :username="comment.username" />
+        <li class="comments-item" v-for="issue in this.starred[this.feed].issues" :key="issue.id">
+          <comment :text="issue.body_html" :username="issue.user.login" />
         </li>
       </ul>
     </div>
@@ -26,6 +26,7 @@
 import { comment } from '../comment'
 import { toggler } from '../toggler'
 import { feedUser } from '../feedUser'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'feed-item',
@@ -43,11 +44,9 @@ export default {
       type: String,
       required: true
     },
-    comments: {
-      type: Array,
-      default() {
-        return []
-      }
+    feed: {
+      type: Number,
+      required: true
     },
     date: {
       type: String
@@ -58,9 +57,32 @@ export default {
       shown: false
     }
   },
+  computed: {
+    ...mapState({
+      starred: state => state.starred.data
+    })
+  },
   methods: {
+    ...mapActions({
+      fetchIssues: 'starred/fetchIssues'
+    }),
     toggle(isOpened) {
       this.shown = isOpened
+      this.loadIssues()
+    },
+    async loadIssues() {
+      this.loading = true
+      try {
+        await this.fetchIssuesForFeed()
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+    },
+    async fetchIssuesForFeed() {
+      const { id, owner, name } = this.starred[this.feed]
+      await this.fetchIssues({ id, owner: owner.login, repo: name })
     }
   }
 }

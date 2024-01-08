@@ -66,7 +66,7 @@ export default {
     icon
 
   },
-  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish', 'onFollow'],
+  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish', 'onFollow', 'onUnFollow'],
   props: {
     active: Boolean,
     loading: Boolean,

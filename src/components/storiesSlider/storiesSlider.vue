@@ -11,6 +11,7 @@
             @onPrevSlide="handleSlide(ndx - 1)"
             @onProgressFinish="handleProgressSlide(ndx + 1)"
             @onFollow="starRepo"
+            @onUnFollow="unStarRepo"
             :btnsShown="activeBtns"
           />
         </li>
@@ -58,9 +59,10 @@ export default {
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
       fetchReadme: 'trendings/fetchReadme',
-      starRepo: 'trendings/starRepo'
+      starRepo: 'trendings/starRepo',
+      unStarRepo: 'trendings/unStarRepo'
     }),
-    async fetchreadmeForActiveSlide() {
+    async fetchReadmeForActiveSlide() {
       const { id, owner, name } = this.trendings[this.slideNdx]
       await this.fetchReadme({ id, owner: owner.login, repo: name })
     },
@@ -77,7 +79,7 @@ export default {
       this.loading = true
       this.btnsShown = false
       try {
-        await this.fetchreadmeForActiveSlide()
+        await this.fetchReadmeForActiveSlide()
       } catch (error) {
         console.log(error)
       } finally {

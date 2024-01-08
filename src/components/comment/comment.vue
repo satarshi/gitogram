@@ -2,7 +2,7 @@
   <div class="c-comment">
     <p>
       <span class="username">{{ username }}</span>
-      {{ text }}
+      <span v-html="text"></span>
     </p>
   </div>
 </template>
