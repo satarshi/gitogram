@@ -21,7 +21,11 @@
       </div>
     </div>
     <div class="button-wrapper">
-      <Button title="Follow" />
+      <Button
+        :loading="data.following.loading"
+        title="Follow"
+        @click="$emit('onFollow', data.id)"
+      />
     </div>
     <template v-if="active">
       <button
@@ -61,7 +65,7 @@ export default {
     icon
 
   },
-  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish'],
+  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish', 'onFollow'],
   props: {
     active: Boolean,
     loading: Boolean,

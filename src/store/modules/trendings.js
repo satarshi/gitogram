@@ -17,12 +17,30 @@ export default {
   },
   mutations: {
     updateTrendings(state, trendings) {
-      state.data = trendings
+      state.data = trendings.map(item => {
+        item.following = {
+          status: false,
+          loading: false,
+          error: ''
+        }
+        return item
+      })
     },
     setReadme(state, payload) {
       state.data = state.data.map(repo => {
         if (payload.id === repo.id) {
           repo.readme = payload.content
+        }
+        return repo
+      })
+    },
+    setFollowing(state, payload) {
+      state.data = state.data.map(repo => {
+        if (payload.id === repo.id) {
+          repo.following = {
+            ...repo.following,
+            ...payload.data
+          }
         }
         return repo
       })
@@ -51,6 +69,18 @@ export default {
         console.log(error)
         throw error
       }
+    },
+    async starRepo(state, id) {
+      // const { name: repo, owner} = state.getters.getRepoById(id)
+
+      state.commit('setFollowing', {
+        id,
+        data: {
+          status: false,
+          loading: true,
+          error: ''
+        }
+      })
     }
   }
 }
