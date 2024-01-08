@@ -22,9 +22,10 @@
     </div>
     <div class="button-wrapper">
       <Button
+        :theme="data.following.status ? 'grey' : 'green'"
         :loading="data.following.loading"
-        title="Follow"
-        @click="$emit('onFollow', data.id)"
+        :title="data.following.status ? 'Unfollow' : 'Follow'"
+        @click="$emit(data.following.status ? 'onUnFollow' : 'onFollow', data.id)"
       />
     </div>
     <template v-if="active">

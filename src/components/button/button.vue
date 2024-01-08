@@ -55,7 +55,7 @@ export default {
     }
   }
 
-  &.gray {
+  &.grey {
     background: #9E9E9E;
 
     &:hover {

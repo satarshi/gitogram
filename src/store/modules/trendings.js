@@ -1,5 +1,6 @@
 import { getPopular } from '@/api/rest/popular'
 import { getReadme } from '@/api/rest/readme'
+import { starRepo } from '@/api/rest/starred'
 
 export default {
   namespaced: true,
@@ -71,7 +72,7 @@ export default {
       }
     },
     async starRepo(state, id) {
-      // const { name: repo, owner} = state.getters.getRepoById(id)
+      const { name: repo, owner } = state.getters.getRepoById(id)
 
       state.commit('setFollowing', {
         id,
@@ -81,6 +82,31 @@ export default {
           error: ''
         }
       })
+
+      try {
+        await starRepo({ owner: owner.login, repo })
+        state.commit('setFollowing', {
+          id,
+          data: {
+            status: true
+          }
+        })
+      } catch (error) {
+        state.commit('setFollowing', {
+          id,
+          data: {
+            status: false,
+            error: 'Error has happend'
+          }
+        })
+      } finally {
+        state.commit('setFollowing', {
+          id,
+          data: {
+            loading: false
+          }
+        })
+      }
     }
   }
 }
