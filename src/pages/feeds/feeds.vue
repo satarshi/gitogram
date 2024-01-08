@@ -22,7 +22,7 @@
         <ul class="stories">
           <li
             class="stories-item"
-            v-for="item in items"
+            v-for="item in trendings"
             :key="item.id"
           >
             <storyUserItem
@@ -39,7 +39,7 @@
     <ul class="feeds">
       <li
         class="feed-item"
-        v-for="feed in items"
+        v-for="feed in trendings"
         :key="feed.id"
       >
         <feed
@@ -73,8 +73,7 @@ import { feed } from '@/components/feed'
 import { social } from '@/components/social'
 import photo from '@/assets/photo.png'
 import mock from './mock.json'
-
-import { getPopular } from '@/api/rest/popular'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'feeds',
@@ -88,11 +87,18 @@ export default {
   data() {
     return {
       mock,
-      photo,
-      items: []
+      photo
     }
   },
+  computed: {
+    ...mapState({
+      trendings: state => state.trendings.data
+    })
+  },
   methods: {
+    ...mapActions({
+      fetchTrendings: 'trendings/fetchTrendings'
+    }),
     handlePress(id) {
       console.log(id)
     },
@@ -101,12 +107,7 @@ export default {
     }
   },
   async created() {
-    try {
-      const { data } = await getPopular()
-      this.items = data.items
-    } catch (error) {
-      console.log(error)
-    }
+    await this.fetchTrendings()
   }
 }
 </script>

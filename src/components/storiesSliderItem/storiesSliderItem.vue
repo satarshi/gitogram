@@ -98,6 +98,8 @@ export default {
   font-size: 14px;
   font-weight: 400;
   line-height: 22.40px;
+  height: 500px;
+  overflow: hidden;
 
   &:before {
     display: block;

@@ -6,6 +6,7 @@
           <storiesSliderItem
             :data="getStoryData(trending)"
             :active="slideNdx === ndx"
+            :loading="slideNdx === ndx && loading"
             @onNextSlide="handleSlide(ndx + 1)"
             @onPrevSlide="handleSlide(ndx - 1)"
             :btnsShown="activeBtns"
@@ -32,7 +33,9 @@ export default {
   },
   data() {
     return {
-      slideNdx: 0
+      slideNdx: 0,
+      loading: false,
+      btnsShown: true
     }
   },
   computed: {
@@ -43,15 +46,21 @@ export default {
       return this.slideNdx * (376 + 38)
     },
     activeBtns() {
+      if (this.btnsShown === false) return []
       if (this.slideNdx === 0) return ['next']
-      if (this.slideNdx === this.trendings.lenght - 1) return ['prev']
+      if (this.slideNdx === this.trendings.length - 1) return ['prev']
       return ['next', 'prev']
     }
   },
   methods: {
     ...mapActions({
-      fetchTrendings: 'trendings/fetchTrendings'
+      fetchTrendings: 'trendings/fetchTrendings',
+      fetchReadme: 'trendings/fetchReadme'
     }),
+    async fetchreadmeForActiveSlide() {
+      const { id, owner, name } = this.trendings[this.slideNdx]
+      await this.fetchReadme({ id, owner: owner.login, repo: name })
+    },
     getStoryData(obj) {
       return {
         id: obj.id,
@@ -60,8 +69,21 @@ export default {
         content: obj.readme
       }
     },
-    handleSlide(ndx) {
+    async loadReadme() {
+      this.loading = true
+      this.btnsShown = false
+      try {
+        await this.fetchreadmeForActiveSlide()
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+        this.btnsShown = true
+      }
+    },
+    async handleSlide(ndx) {
       this.slideNdx = ndx
+      await this.loadReadme()
     }
   },
   async mounted() {
